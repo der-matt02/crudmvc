@@ -3,7 +3,7 @@ from sqlalchemy import Column, String
 from sqlalchemy.dialects.mysql import CHAR
 from ..db.database import Base
 
-class Customer(Base):
+class UserModel(Base):
     __tablename__ = "users"
 
     id = Column(CHAR(36), primary_key=True, default=lambda: str(uuid.uuid4()))
