@@ -32,17 +32,21 @@ This is a simple but complete MVC CRUD application for managing users, built as 
 ### 🔧 Backend Setup
 
 1. Clone the repository:
-git clone https://github.com/der-matt02/crudmvc.git
-cd your-crud-project
+git clone https://github.com/der-matt02/crudmvc.git 
 
-2. Create a conda environment and activate it:
-conda create -n usercrud python=3.11
-conda activate usercrud
+      cd your-crud-project
 
-3. Install Python dependencies:
-pip install -r backend/requirements.txt
+3. Create a conda environment and activate it: 
+   
+      conda create -n usercrud python=3.11 
 
-4. Run the backend:
+      conda activate usercrud
+
+5. Install Python dependencies: 
+   
+      pip install -r backend/requirements.txt
+
+7. Run the backend:
 cd backend
 uvicorn main:app --reload
 
