@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker
 
-# Configuración de la conexión a la base de datos SQLite en memoria
+# Conexion de base de datos SQLITE
 DATABASE_URL = "sqlite:///./test.db"  # Base de datos en un archivo local
 
 # Crear el motor de la base de datos
@@ -10,8 +10,8 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False}) 
 # Crear el SessionLocal que se usará para crear sesiones con la base de datos
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Inicializar los metadatos
+# Inicializar metadata
 meta = MetaData()
 
-# Establecer la conexión a la base de datos
+# Establecer la conexión a bd
 connection_db = engine.connect()
