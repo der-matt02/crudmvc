@@ -1,22 +1,20 @@
 # backend/schemas/user_schema.py
-from pydantic import BaseModel
-from typing import Optional
-
+from pydantic import BaseModel, constr
 
 class UserBase(BaseModel):
-    username: str
-    name: str
-    last_name: str
-    email: str
-    password: str
-
+    username: constr(min_length=3, max_length=50)
 
 class UserCreate(UserBase):
-    pass
+    password: constr(min_length=6)
 
+class UserUpdate(UserBase):
+    # El campo password es opcional para la actualización
+    password: constr(min_length=6) | None = None
 
-class UserInDB(UserBase):
+class UserOut(UserBase):
     id: int
 
     class Config:
-        orm_mode = True  # Esto permite que Pydantic convierta modelos SQLAlchemy en dictos
+        from_attributes = True
+        #orm_mode = True
+

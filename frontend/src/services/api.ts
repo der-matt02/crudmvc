@@ -1,11 +1,6 @@
-import axios from "axios";
+// src/services/api.ts
+import axios from 'axios';
 
-// Creando instancia de Axios
-const api = axios.create({
-  baseURL: "http://127.0.0.1:8000", // cambiar esto si se cambia de back
-  headers: {
-    "Content-Type": "application/json",
-  },
+export const api = axios.create({
+  baseURL: 'http://localhost:8000' // Asegúrate de que coincida con la URL de tu backend
 });
-
-export default api;

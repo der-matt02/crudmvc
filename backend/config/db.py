@@ -1,17 +1,12 @@
-from sqlalchemy import create_engine, MetaData
+# backend/config/database.py
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# Conexion de base de datos SQLITE
-DATABASE_URL = "sqlite:///./test.db"  # Base de datos en un archivo local
+SQLALCHEMY_DATABASE_URL = "sqlite:///./usuarios.db"  # Ruta a tu BD
 
-# Crear el motor de la base de datos
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})  # Para usar SQLite
-
-# Crear el SessionLocal que se usará para crear sesiones con la base de datos
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Inicializar metadata
-meta = MetaData()
-
-# Establecer la conexión a bd
-connection_db = engine.connect()
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+)
+SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+Base = declarative_base()
