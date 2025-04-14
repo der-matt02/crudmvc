@@ -1,4 +1,3 @@
-// src/pages/LoginPage.tsx
 import React, { useState, useContext, FormEvent } from 'react';
 import { AuthContext } from '../context/AuthContext';
 

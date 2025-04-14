@@ -1,4 +1,3 @@
-# backend/auth/utils.py
 from passlib.context import CryptContext
 import jwt
 from datetime import datetime, timedelta

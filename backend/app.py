@@ -1,4 +1,3 @@
-# backend/app.py
 from fastapi import FastAPI
 from backend.config.db import engine, Base
 from backend.models.user_model import User  # Importar para registrar el modelo en la metadata; no se usa directamente.

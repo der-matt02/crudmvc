@@ -1,47 +1,52 @@
-// src/pages/UserFormPage.tsx
 import React, { useState, useEffect, FormEvent } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { api } from '../services/api';
 
 interface FormData {
   username: string;
-  password?: string;
+  password?: string; // se exige en creación, opcional en edición
 }
 
-const UserFormPage = () => {
+const UserFormPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const isEdit = Boolean(id);
-  const [formData, setFormData] = useState<FormData>({ username: '', password: '' });
   const navigate = useNavigate();
+  const [formData, setFormData] = useState<FormData>({ username: '', password: '' });
 
   useEffect(() => {
     if (isEdit) {
-      // Cargar los datos existentes del usuario para editar
+      // Si estamos editando, cargar los datos del usuario desde el backend
       api.get(`/users/${id}`)
         .then(response => {
+          // Suponiendo que el backend retorna al menos { id, username }
           setFormData({ username: response.data.username });
         })
         .catch(error => {
-          console.error('Error al cargar datos del usuario', error);
+          console.error('Error al cargar el usuario:', error);
         });
     }
   }, [isEdit, id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       if (isEdit) {
+        // En edición, se hace PUT
         await api.put(`/users/${id}`, formData);
       } else {
+        // En creación, se hace POST
         await api.post('/users', formData);
       }
       navigate('/users');
     } catch (error) {
-      console.error('Error al guardar el usuario', error);
+      console.error('Error al guardar el usuario:', error);
       alert('Error al guardar el usuario');
     }
   };
@@ -60,7 +65,6 @@ const UserFormPage = () => {
             required
           />
         </div>
-        {/* Se solicita la contraseña solo al crear; si se edita puede ser opcional */}
         {!isEdit && (
           <div>
             <label>Contraseña:</label>
@@ -76,7 +80,9 @@ const UserFormPage = () => {
         <button type="submit">Guardar</button>
         <button type="button" onClick={() => navigate('/users')}>Cancelar</button>
       </form>
-      <p><Link to="/">← Volver al Menú</Link></p>
+      <p>
+        <Link to="/">← Volver al Menú Principal</Link>
+      </p>
     </div>
   );
 };

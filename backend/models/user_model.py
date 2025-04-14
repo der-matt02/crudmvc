@@ -1,4 +1,3 @@
-# backend/models/user.py
 from sqlalchemy import Column, Integer, String
 from backend.config.db import Base  # Importa Base desde config
 

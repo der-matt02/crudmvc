@@ -1,4 +1,3 @@
-// src/App.tsx
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRoute';
@@ -10,10 +9,7 @@ import UserFormPage from './pages/UserFormPage';
 function App() {
   return (
     <Routes>
-      {/* Ruta pública para el login */}
       <Route path="/login" element={<LoginPage />} />
-
-      {/* Rutas protegidas */}
       <Route element={<PrivateRoute />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<UsersListPage />} />
