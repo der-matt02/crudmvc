@@ -1,5 +1,6 @@
 import React, { useState, useContext, FormEvent } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const auth = useContext(AuthContext);
@@ -40,6 +41,7 @@ const LoginPage = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      <p>¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link></p>
     </div>
   );
 };
